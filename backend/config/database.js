@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 // process.env.DB_URI 
 const connectDatabase = () => {
-    mongoose.connect("mongodb://localhost:27017/Ecommerse").then((data) => {
-        console.log(`mongodb connected with server ${data.connection.host}`);
+    mongoose.connect(process.env.DB_URI).then((data) => {
+        console.log(`mongodb connected with server ${data.connection.host}-${process.env.PORT} `);
     }).catch((error) => {
         console.log(error)
     })

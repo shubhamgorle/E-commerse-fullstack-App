@@ -1,0 +1,11 @@
+day 1.
+backend ---> models     ---> productController
+             controller ---> productModel
+             routes     ---> productRoute
+
+day 2.
+Error handling
+middleware ---> catchAsyError.js, error.js
+utils ---> errorhandler.js
+
+Search, Filter, pagination
