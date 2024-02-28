@@ -8,4 +8,12 @@ Error handling
 middleware ---> catchAsyError.js, error.js
 utils ---> errorhandler.js
 
-Search, Filter, pagination
+day 3 ---> Search, Filter, pagination
+
+
+
+
+
+
+
+Note---> flow---> m-c-r ---> models, controller, route ---> app.js 
