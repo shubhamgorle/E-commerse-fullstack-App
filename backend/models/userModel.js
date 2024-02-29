@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
-const uerSchema = new mongoose.Schema({
+const crypto = require("crypto");
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Please Enter Your Name"],
@@ -42,25 +43,41 @@ const uerSchema = new mongoose.Schema({
 // if password is same as before means it is not modified again then we will not bcrypt the pass
 // this case will use when user change the pass if pass change then only it will brypt the pass else it will not .
 // agar pass change nhi hua hai to pasword brypt nhi krna next kr dena if hua hai to usko brypt krna
-uerSchema.pre("save", async function (next){
+userSchema.pre("save", async function (next){
     if(!this.isModified("password")){
         next();
     }
     this.password = await bcrypt.hash(this.password, 10);
-    console.log("working",this.password)
+    // console.log("working",this.password)
 })
 
 // JWt token;
-uerSchema.methods.getJWTToken = function () {
-    //  return jwt.sign({id:this._id}, process.env.JWT_SECRET,{
-    //     expiresIn:process.env.JWT_EXPIRE
-    return jwt.sign({ id: this._id }, "7yh5632921hiu2h1ui", {
-        expiresIn: "5d"
+userSchema.methods.getJWTToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE
     })
 }
 // compare password;
-uerSchema.methods.comparePassWord = async function(enteredPassword){
+userSchema.methods.comparePassWord = async function(enteredPassword){
         return await bcrypt.compare(enteredPassword,this.password)
 }
+
+// Generating pasword Reset Toen
+userSchema.methods.getResetPasswordToken = function(){
+    // generate token
+const resettoken = crypto.randomBytes(20).toString("hex");
+
+// Hashing and adding Resetpassword token to userSchema
+   this.resetPasswordToken = crypto
+   .createHash("sha256")
+   .update(resettoken)
+   .digest("hex");
+
+   this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+   return resettoken;
+}
+
 // console.log(process.env.JWT_EXPIRE)
-module.exports = mongoose.model("User", uerSchema)
+module.exports = mongoose.model("User", userSchema)
+
+// uerSchema
