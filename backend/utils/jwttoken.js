@@ -1,5 +1,5 @@
 
-// creating token and saving in cookei
+// creating token and saving in cookie
 
 const sendtoken = (user, statuscode, res)=>{
     const token = user.getJWTToken();
