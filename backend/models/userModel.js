@@ -79,5 +79,4 @@ const resettoken = crypto.randomBytes(20).toString("hex");
 
 // console.log(process.env.JWT_EXPIRE)
 module.exports = mongoose.model("User", userSchema)
-
 // uerSchema
