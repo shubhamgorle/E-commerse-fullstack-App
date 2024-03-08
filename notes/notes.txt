@@ -12,8 +12,4 @@ day 3 ---> Search, Filter, pagination
 
 
 
-
-
-
-
 Note---> flow---> m-c-r ---> models, controller, route ---> app.js 
