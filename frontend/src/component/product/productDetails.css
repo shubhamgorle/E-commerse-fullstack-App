@@ -1,0 +1,12 @@
+.ProductDetails{
+    display: flex;
+    background-color: rgb(185, 177, 177);
+    width: 100vw;
+    max-width: 100%;
+    padding: 6vmax;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+.ProductDetails > div{
+ width: 50%;
+}
