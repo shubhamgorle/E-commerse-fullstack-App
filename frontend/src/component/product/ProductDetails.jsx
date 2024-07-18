@@ -10,7 +10,6 @@ const ProductDetails = () => {
     const dispatch = useDispatch();
     const { product } = useSelector((state) => state.productDetails);
     console.log(product)
-
     const { id } = useParams();
     const options = {
         edit: false,
@@ -33,7 +32,7 @@ const ProductDetails = () => {
                             product.Images.map((item, idx) => (
                                 <img
                                     className="CarouselImage"
-                                    key={item.url}
+                                    key={idx}
                                     src={item.url}
                                     alt={`${idx} slide`}
                                 />
