@@ -1,5 +1,7 @@
 // Serach 
 class ApiFeatures {
+    // query ---> Product.find()
+    // queryStr --->  req.query
     constructor(query, queryStr) {
         this.query = query;
         this.queryStr = queryStr;
@@ -18,7 +20,7 @@ class ApiFeatures {
         const queryCopy = {...this.queryStr}
         //  Removing Some Feild for category
         const removeFeilds = ["keyword", "page", "limit"];
-        removeFeilds.forEach(key => delete queryCopy[key]);
+        removeFeilds.forEach((key) => delete queryCopy[key]);
       
         // console.log("queryCopy",queryCopy)   output --> queryCopy { price: { gt: '1200', lt: '3300' } }
     //   Filter for price and rating
@@ -33,7 +35,6 @@ class ApiFeatures {
     }
     pagination(resultPerPage){
         const curPage = Number(this.queryStr.page) || 1;
-        
         const skip = resultPerPage*(curPage-1);
         this.query = this.query.limit(resultPerPage).skip(skip);
         return this;
@@ -42,3 +43,5 @@ class ApiFeatures {
 
 
 module.exports = ApiFeatures
+
+    

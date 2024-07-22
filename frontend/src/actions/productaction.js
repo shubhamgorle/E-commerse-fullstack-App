@@ -8,10 +8,14 @@ import {
     PRODUCT_DETAIL_SUCCESS
 } from "../constatnce/productConstant";
 import axios from 'axios'
-export const getProduct = () => async (dispatch) => {
+export const getProduct = (keyword = "", currentPage=1, price=[0, 50000], category, ratings=0) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
-        let data = await axios.get("/api/v1/products");
+        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]} &price[lte]=${price[1]}&ratings[gte]=${ratings}`
+        if(category){
+             link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]} &price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+        }
+        let data = await axios.get(link);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
             payload: data.data

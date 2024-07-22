@@ -20,17 +20,22 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 // get all products
 exports.getAllProducts = catchAsyncError(async (req, res,next) => {
 // return next(new ErrorHandler("this my temp error", 500))
-    const resultPerPage = 8;
+    const resultPerPage = 4;
     const productsCount = await Product.countDocuments()
     const apiFeatures = new ApiFeatures(Product.find(), req.query)
         .search()
         .filter()
-        .pagination(resultPerPage);
-    const products = await apiFeatures.query;
+        let products = await apiFeatures.query.clone();
+        let filterdProductCount = products.length;
+        apiFeatures.pagination(resultPerPage);
+        products = await apiFeatures.query;
+
     res.status(200).json({
         success: true,
         products,
-        productsCount
+        productsCount,
+        resultPerPage,
+        filterdProductCount
     })
 })
 

@@ -8,6 +8,7 @@ import ReviewCard from './ReviewCard'
 import ReactStars from "react-rating-stars-component"
 import Loader from '../layout/loader/Loader'
 import {useAlert} from 'react-alert'
+import Metadata from '../layout/Metadata'
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const alert = useAlert()
@@ -19,7 +20,7 @@ const ProductDetails = () => {
         color: "rgba(20,20,20,0.1)",
         activeColor: "tomato",
         size: window.innerWidth < 600 ? 20 : 25,
-        value: product.rating,
+        value: product.ratings,
         isHalf: true
     }
     useEffect(() => {
@@ -34,6 +35,8 @@ const ProductDetails = () => {
         {
             loading ? (<Loader/>):(
                 <Fragment>
+                   <Metadata title={`${product.name} -- ECOMMERCE`}/>
+
                 <div className="ProductDetails">
                     <div>
                         <Carousel>
