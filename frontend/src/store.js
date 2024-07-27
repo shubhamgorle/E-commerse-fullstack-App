@@ -3,9 +3,11 @@ import {thunk} from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import { productReducer } from './reducers/productreducer';
 import { productDetailReducer } from './reducers/productreducer';
+import { userReducer } from './reducers/userReducer';
 const reducer = combineReducers({
     products:productReducer,
-    productDetails:productDetailReducer
+    productDetails:productDetailReducer,
+    user:userReducer
 });
 let initialstate = {};
 const middleware = [thunk];
