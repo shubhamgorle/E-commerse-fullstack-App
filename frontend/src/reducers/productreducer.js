@@ -15,7 +15,7 @@ export const productReducer = ((state = { products: [] }, action) => {
             products: []
         }
     }
-    else if (action.type === ALL_PRODUCT_SUCCESS) {
+    else if (action.type === ALL_PRODUCT_SUCCESS){
         return {
             loading: false,
             products: action.payload.products,
