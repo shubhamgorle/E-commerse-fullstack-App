@@ -48,7 +48,6 @@ const UpdatePassword = () => {
         <div className='updatePasswordBox'>
           <h2 className='updatePasswordHeading'>Change Password</h2>
           <form className='updatePasswordForm'
-            encType='multipart/form-data'
             onSubmit={updatePasswordSubmit}
           >
             <div className='loginPassword'>

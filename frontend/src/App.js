@@ -17,6 +17,8 @@ import Profile from './component/User/Profile.jsx';
 import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
 import UpdatedProfile from './component/User/UpdatedProfile.jsx';
 import UpdatePassword from './component/User/UpdatePassword.jsx';
+import ForgotPassword from './component/User/ForgotPassword.jsx';
+import ResetPassword from './component/User/ResetPassword.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user)
   useEffect(() => {
@@ -42,6 +44,8 @@ function App() {
           <Route extact path='/login' element={<LoginSignup />} />
           <Route extact path='/me/update' element={<ProtectedRoute><UpdatedProfile/></ProtectedRoute>} />
           <Route extact path='/password/update' element={<ProtectedRoute><UpdatePassword/></ProtectedRoute>} />
+          <Route extact path='/password/forgot' element={<ForgotPassword/>}/>
+          <Route extact path='/password/reset/:token' element={<ResetPassword/>}/>
         </Routes>
         <Footer />
       </Router>
