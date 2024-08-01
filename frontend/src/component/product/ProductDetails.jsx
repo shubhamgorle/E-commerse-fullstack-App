@@ -35,9 +35,12 @@ const ProductDetails = () => {
         if (product.stock <= quantity) {
             return
         }
-        console.log(product.stock)
         const qty = quantity + 1;
         setQuantity(qty)
+    }
+    const addToCartHandler = () =>{
+        dispatch(addItemsToCart(id, quantity))
+        alert.success("Item Added To Cart");
     }
     useEffect(() => {
         if (error) {
@@ -87,12 +90,12 @@ const ProductDetails = () => {
                                             <button onClick={decreaseQuantity}>-</button>
                                             <input type="number" readOnly value={quantity} />
                                             <button onClick={increaseQuantity}>+</button>
-                                        </div>{" "}
-                                        <button>Ad to Cart</button>
+                                        </div>
+                                        <button onClick={addToCartHandler}>Ad to Cart</button>
                                     </div>
 
                                     <p>
-                                        Status:{" "}
+                                        Status:
                                         <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                                             {product.Stock < 1 ? "OutOfStock" : "InStock"}
                                         </b>
