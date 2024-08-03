@@ -8,10 +8,12 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useDispatch, useSelector } from "react-redux"
 import { login,register, clearErrors } from "../../actions/userActions"
 import { useAlert } from 'react-alert'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation  } from 'react-router-dom';
+
 const LoginSignup = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
     const alert = useAlert();
     const { error, loading, isAuthenticated } = useSelector(state => state.user)
     const loginTab = useRef(null)
@@ -57,15 +59,18 @@ const LoginSignup = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
         }
     }
+    // The search property returns the querystring part of a URL, including the question mark (?).
+    // "/login?redirect=shipping"
+    const redirect = location.search ? location.search.split("=")[1] : "account"
     useEffect(() => {
         if (error) {
             alert.error(error)
             dispatch(clearErrors())
         } 
         if(isAuthenticated){
-            navigate("/account")
+            navigate(`/${redirect}`)
         }
-    }, [dispatch, alert, error, isAuthenticated, navigate])
+    }, [dispatch, alert, error, isAuthenticated, navigate,redirect])
     const switchTabs = (e, tab) => {
         if (tab === "login") {
             switcherTab.current.classList.add("shiftToNewtral")

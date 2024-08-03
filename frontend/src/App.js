@@ -14,12 +14,14 @@ import { loadUser } from './actions/userActions.js';
 import UserOption from './component/layout/Header/UserOption.jsx';
 import { useSelector } from 'react-redux';
 import Profile from './component/User/Profile.jsx';
-import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
+// import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
 import UpdatedProfile from './component/User/UpdatedProfile.jsx';
 import UpdatePassword from './component/User/UpdatePassword.jsx';
 import ForgotPassword from './component/User/ForgotPassword.jsx';
 import ResetPassword from './component/User/ResetPassword.jsx';
 import Cart from './component/Cart/Cart.jsx';
+import Shipping from './component/Cart/Shipping.jsx';
+import ConfirmOrder from './component/Cart/ConfirmOrder.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user)
   useEffect(() => {
@@ -41,13 +43,15 @@ function App() {
           <Route extact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
           <Route extact path='/search' element={<Search />} />
-          <Route extact path='/account' element={<ProtectedRoute><Profile/></ProtectedRoute>} />
+          <Route extact path='/account' element={isAuthenticated &&<Profile/>} />
           <Route extact path='/login' element={<LoginSignup />} />
-          <Route extact path='/me/update' element={<ProtectedRoute><UpdatedProfile/></ProtectedRoute>} />
-          <Route extact path='/password/update' element={<ProtectedRoute><UpdatePassword/></ProtectedRoute>} />
+          <Route extact path='/me/update' element={isAuthenticated &&<UpdatedProfile/>} />
+          <Route extact path='/password/update' element={isAuthenticated && <UpdatePassword/>} />
           <Route extact path='/password/forgot' element={<ForgotPassword/>}/>
           <Route extact path='/password/reset/:token' element={<ResetPassword/>}/>
           <Route extact path='/cart' element={<Cart/>}/>
+          <Route extact path='/shipping' element={isAuthenticated && <Shipping/>} />
+          <Route extact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>} />
         </Routes>
         <Footer />
       </Router>
