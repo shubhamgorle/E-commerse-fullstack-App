@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from "./component/layout/Header.jsx"
 import Footer from './component/layout/Footer.jsx';
@@ -22,15 +22,30 @@ import ResetPassword from './component/User/ResetPassword.jsx';
 import Cart from './component/Cart/Cart.jsx';
 import Shipping from './component/Cart/Shipping.jsx';
 import ConfirmOrder from './component/Cart/ConfirmOrder.jsx';
+import axios from 'axios';
+import Payment from './component/Cart/Payment.jsx';
+import {Elements} from "@stripe/react-stripe-js"
+import {loadStripe} from "@stripe/stripe-js"
+
+
 function App() {
-  const { isAuthenticated, user } = useSelector(state => state.user)
+  const { isAuthenticated, user } = useSelector(state => state.user);
+
+    const [stripeApiKey, setStripeApiKey] = useState("");
+
+    async function getStripeApiKey(){
+    const {data} = await axios.get("/api/v1/stripeapikey");
+    setStripeApiKey(data.stripeApiKey);
+    }
+
   useEffect(() => {
     WebFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"]
       }
     })
-    store.dispatch(loadUser())
+    store.dispatch(loadUser());
+    getStripeApiKey();
   }, [])
   return (
     <>
@@ -52,6 +67,10 @@ function App() {
           <Route extact path='/cart' element={<Cart/>}/>
           <Route extact path='/shipping' element={isAuthenticated && <Shipping/>} />
           <Route extact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>} />
+          {
+            stripeApiKey && <Route extact path='/process/payment' element={isAuthenticated && <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>} />
+          }
+         
         </Routes>
         <Footer />
       </Router>

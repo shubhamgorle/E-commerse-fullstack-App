@@ -5,18 +5,32 @@ import { useSelector } from 'react-redux';
 import Metadata from '../layout/Metadata';
 import { Link } from "react-router-dom";
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 const ConfirmOrder = () => {
-    const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-    const { user } = useSelector((state) => state.user);
-       const subtotal = cartItems.reduce((acc, item)=> acc + item.quantity * item.price, 0);
+        const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+        const { user } = useSelector((state) => state.user);
+        const navigate = useNavigate();
+        const subtotal = cartItems.reduce((acc, item)=> acc + item.quantity * item.price, 0);
 
-       const shippingCharges = subtotal > 1000 ? 0 : 200;
+        const shippingCharges = subtotal > 1000 ? 0 : 200;
         
         const tax = subtotal * 0.18
 
         const totalPrice = subtotal + shippingCharges + tax;
         const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`
-    return (
+   
+         const proceedToPayment = () =>{
+            const data = {
+                subtotal,
+                shippingCharges,
+                tax,
+                totalPrice
+            }
+            sessionStorage.setItem("orderInfo", JSON.stringify(data));
+            navigate("/process/payment")
+         }
+   
+        return (
         <Fragment>
             <Metadata title="Confirm Order" />
             <CheckoutStep activeStep={1} />
@@ -80,13 +94,13 @@ const ConfirmOrder = () => {
                             </div>
                         </div>
 
-                        <div className="orderSummeryTotal">
+                        <div className="orderSummaryTotal">
                             <p>
                                 <b>Total:</b>
                             </p>
                             <span>&#x20B9;{totalPrice}</span>
                         </div>
-                        <button>Proceed To Payment</button>
+                        <button onClick={proceedToPayment}>Proceed To Payment</button>
                     </div>
                 </div>
 
