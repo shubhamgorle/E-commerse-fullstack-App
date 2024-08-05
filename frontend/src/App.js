@@ -14,7 +14,7 @@ import { loadUser } from './actions/userActions.js';
 import UserOption from './component/layout/Header/UserOption.jsx';
 import { useSelector } from 'react-redux';
 import Profile from './component/User/Profile.jsx';
-// import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
+import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
 import UpdatedProfile from './component/User/UpdatedProfile.jsx';
 import UpdatePassword from './component/User/UpdatePassword.jsx';
 import ForgotPassword from './component/User/ForgotPassword.jsx';
@@ -26,6 +26,8 @@ import axios from 'axios';
 import Payment from './component/Cart/Payment.jsx';
 import {Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
+import OrderSuccess from './component/Cart/OrderSuccess.jsx';
+import MyOrders from './component/Orders/MyOrders.jsx';
 
 
 function App() {
@@ -70,6 +72,8 @@ function App() {
           {
             stripeApiKey && <Route extact path='/process/payment' element={isAuthenticated && <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>} />
           }
+          <Route extact path='/success' element={isAuthenticated && <OrderSuccess/>} />
+          <Route extact path='/orders' element={isAuthenticated && <MyOrders/>} />
          
         </Routes>
         <Footer />

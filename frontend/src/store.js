@@ -5,13 +5,17 @@ import { productReducer } from './reducers/productreducer';
 import { productDetailReducer } from './reducers/productreducer';
 import { userReducer, profileReducer,forgotPasswordReducer } from './reducers/userReducer';
 import { cartReducer } from './reducers/cartReducer';
+import { newOrderReducer } from './reducers/orderReducer';
+import { myOrdersReducer } from './reducers/orderReducer';
 const reducer = combineReducers({
     products:productReducer,
     productDetails:productDetailReducer,
     user:userReducer,
     profile:profileReducer,
     forgotPassword:forgotPasswordReducer,
-    cart:cartReducer
+    cart:cartReducer,
+    newOrder:newOrderReducer,
+    myOrders:myOrdersReducer
 });
 let initialstate = {
     cart:{
