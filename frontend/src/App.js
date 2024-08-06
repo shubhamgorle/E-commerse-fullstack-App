@@ -28,6 +28,7 @@ import {Elements} from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
 import OrderSuccess from './component/Cart/OrderSuccess.jsx';
 import MyOrders from './component/Orders/MyOrders.jsx';
+import OrderDetails from './component/Orders/OrderDetails.jsx';
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
           }
           <Route extact path='/success' element={isAuthenticated && <OrderSuccess/>} />
           <Route extact path='/orders' element={isAuthenticated && <MyOrders/>} />
+          <Route extact path='/order/:id' element={isAuthenticated && <OrderDetails/>} />
          
         </Routes>
         <Footer />

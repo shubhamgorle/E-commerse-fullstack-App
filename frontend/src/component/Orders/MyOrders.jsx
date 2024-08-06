@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, renderActionsCell } from '@mui/x-data-grid';
 import "./MyOrders.css";
 import { clearErrors, myOrders } from '../../actions/orderAction';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,9 +17,21 @@ const MyOrders = () => {
   const alert = useAlert();
   const columns = [
     { field: 'id', headerName: 'Order ID', minWidth: 300 , flex : 1},
-    { field: 'status', headerName: 'Status', minWidth: 150, flex : 0.5 },
+    { field: 'status', headerName: 'Status', minWidth: 150, flex : 0.5, cellClassName: (params)=>{
+        return (params.row.status === "Delivered" ? "greenColor" : "redColor")
+    } },
     { field: 'itemsQty', headerName: 'Items Qty', minWidth: 150, flex : 0.3 , type:"number"},
     { field: 'amount', headerName: 'Amount', minWidth: 270, flex : 0.5 , type:"number"},
+    { field: 'actions', headerName: 'Actions', minWidth: 150,  type:"number", sortable:false,
+      renderCell: (params)=>{
+        console.log(params)
+        return(
+          <Link to={`/order/${params.row.id}`}>
+            <LaunchIcon/>
+          </Link>
+        )
+      }
+    },
   ];
   const rows = []
   orders &&
@@ -55,7 +67,7 @@ useEffect(()=>{
               className='myOrdersTable'
               autoHeight
             />
-            <Typography className='myOrdersHeading'>{user.name}'s Orders</Typography>
+            <Typography id='myOrdersHeading'>{user.name}'s Orders</Typography>
           </div>
         )
       }
