@@ -12,7 +12,7 @@ import {
 } from "../constatnce/orderConstants";
 
 
-export const newOrderReducer = (state = {}, action) => {
+export const newOrderReducer = (state = {}, action) =>{
     switch (action.type) {
         case CREATE_ORDER_REQUEST:
             return {
@@ -28,7 +28,7 @@ export const newOrderReducer = (state = {}, action) => {
         case CREATE_ORDER_FAIL:
             return {
                 ...state,
-                loading: true,
+                loading: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:
@@ -55,7 +55,7 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
             }
         case MY_ORDER_FAIL:
             return {
-                loading: true,
+                loading: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:
@@ -82,7 +82,7 @@ export const orderDetailsReducer = (state = { order: {} }, action) => {
             }
         case MY_ORDER_DETAILS_FAIL:
             return {
-                loading: true,
+                loading: false,
                 error: action.payload
             }
         case CLEAR_ERRORS:

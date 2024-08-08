@@ -5,8 +5,8 @@ const ReviewCard = ({review}) => {
     const options = {
         edit: false,
         color: "rgba(20,20,20,0.1)",
-        activeColor: "tomato",
-        size: window.innerWidth < 600 ? 20 : 25,
+        activeColor: "rgb(255,180,0)",
+        size:window.innerWidth < 600 ? 14 : 27,
         value: review.rating,
         isHalf: true
     }

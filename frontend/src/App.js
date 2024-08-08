@@ -14,7 +14,7 @@ import { loadUser } from './actions/userActions.js';
 import UserOption from './component/layout/Header/UserOption.jsx';
 import { useSelector } from 'react-redux';
 import Profile from './component/User/Profile.jsx';
-import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
+// import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
 import UpdatedProfile from './component/User/UpdatedProfile.jsx';
 import UpdatePassword from './component/User/UpdatePassword.jsx';
 import ForgotPassword from './component/User/ForgotPassword.jsx';
@@ -29,7 +29,6 @@ import {loadStripe} from "@stripe/stripe-js"
 import OrderSuccess from './component/Cart/OrderSuccess.jsx';
 import MyOrders from './component/Orders/MyOrders.jsx';
 import OrderDetails from './component/Orders/OrderDetails.jsx';
-
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
@@ -56,27 +55,27 @@ function App() {
         <Header />
         {isAuthenticated && <UserOption user={user} />}
         <Routes>
-          <Route extact path='/' element={<Home />} />
-          <Route extact path='/product/:id' element={<ProductDetails />} />
-          <Route extact path='/products' element={<Products />} />
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/product/:id' element={<ProductDetails />} />
+          <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
-          <Route extact path='/search' element={<Search />} />
-          <Route extact path='/account' element={isAuthenticated &&<Profile/>} />
-          <Route extact path='/login' element={<LoginSignup />} />
-          <Route extact path='/me/update' element={isAuthenticated &&<UpdatedProfile/>} />
-          <Route extact path='/password/update' element={isAuthenticated && <UpdatePassword/>} />
-          <Route extact path='/password/forgot' element={<ForgotPassword/>}/>
-          <Route extact path='/password/reset/:token' element={<ResetPassword/>}/>
-          <Route extact path='/cart' element={<Cart/>}/>
-          <Route extact path='/shipping' element={isAuthenticated && <Shipping/>} />
-          <Route extact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>} />
+          <Route exact path='/search' element={<Search />} />
+          <Route exact path='/account' element={isAuthenticated &&<Profile/>} />
+          <Route exact path='/login' element={<LoginSignup />} />
+          <Route exact path='/me/update' element={isAuthenticated &&<UpdatedProfile/>} />
+          <Route exact path='/password/update' element={isAuthenticated && <UpdatePassword/>} />
+          <Route exact path='/password/forgot' element={<ForgotPassword/>}/>
+          <Route exact path='/password/reset/:token' element={<ResetPassword/>}/>
+          <Route exact path='/cart' element={<Cart/>}/>
+          <Route exact path='/shipping' element={isAuthenticated && <Shipping/>} />
           {
-            stripeApiKey && <Route extact path='/process/payment' element={isAuthenticated && <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>} />
+            stripeApiKey && <Route exact path='/process/payment' element={isAuthenticated && <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>} />
           }
-          <Route extact path='/success' element={isAuthenticated && <OrderSuccess/>} />
-          <Route extact path='/orders' element={isAuthenticated && <MyOrders/>} />
-          <Route extact path='/order/:id' element={isAuthenticated && <OrderDetails/>} />
-         
+          <Route exact path='/success' element={isAuthenticated && <OrderSuccess/>} />
+          <Route exact path='/orders' element={isAuthenticated && <MyOrders/>} />
+          <Route exact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>} />
+          <Route exact path='/order/:id' element={isAuthenticated && <OrderDetails/>} />
+          
         </Routes>
         <Footer />
       </Router>

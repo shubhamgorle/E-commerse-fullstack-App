@@ -5,7 +5,10 @@ import {
     CLEAR_ERRORS,
     PRODUCT_DETAIL_REQUEST,
     PRODUCT_DETAIL_FAIL,
-    PRODUCT_DETAIL_SUCCESS
+    PRODUCT_DETAIL_SUCCESS,
+    NEW_REVIEW_SUCCESS,
+    NEW_REVIEW_FAIL,
+    NEW_REVIEW_REQUEST
 } from "../constatnce/productConstant";
 import axios from 'axios'
 export const getProduct = (keyword = "", currentPage=1, price=[0, 50000], category, ratings=0) => async (dispatch) => {
@@ -21,7 +24,6 @@ export const getProduct = (keyword = "", currentPage=1, price=[0, 50000], catego
             payload: data.data
         })
     } catch (error) {
-        console.log(error)
         dispatch({
             type: ALL_PRODUCT_FAIL,
             payload: error
@@ -34,7 +36,7 @@ export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS })
 }
 
-
+// get Product Details 
 export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAIL_REQUEST });
@@ -47,6 +49,27 @@ export const getProductDetails = (id) => async (dispatch) => {
         console.log(error)
         dispatch({
             type: PRODUCT_DETAIL_FAIL,
+            payload: error
+        })
+    }
+}
+
+// New Review
+export const newReview = (reviewData) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {"Content-Type" : "application/json" }
+        }
+        dispatch({ type: NEW_REVIEW_REQUEST });
+        let {data} = await axios.put(`/api/v1/review`, reviewData, config);
+        dispatch({
+            type: NEW_REVIEW_SUCCESS,
+            payload: data.success
+        })
+    } catch (error) {
+        console.log(error)
+        dispatch({
+            type: NEW_REVIEW_FAIL,
             payload: error
         })
     }

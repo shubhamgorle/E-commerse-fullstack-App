@@ -7,17 +7,18 @@ const ProductCard = ({product}) => {
   const options={
     edit:false,
     color:"rgba(20,20,20,0.1)",
-    activeColor:"tomato",
-    size:window.innerWidth < 600 ? 20 : 25,
+    activeColor:"rgb(255,180,0)",
+    size:window.innerWidth < 600 ? 14 : 27,
     value:product.ratings,
     isHalf:true
 }
+console.log(options.size)
   return (
     <Link className='productCard' to={`/product/${product._id}`}>
     <img src={product.Images[0].url} alt={product.name} />
     <p>{product.name}</p>
     <div>
-        <ReactStars {...options}/> <span>({product.numOfReviews})</span>
+        <ReactStars {...options}/> <span>({product.numOfReviews} Reviews)</span>
     </div>
     <span><span>&#8377;</span>{product.price}</span>
     </Link>

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { DataGrid, renderActionsCell } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import "./MyOrders.css";
 import { clearErrors, myOrders } from '../../actions/orderAction';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,7 +24,6 @@ const MyOrders = () => {
     { field: 'amount', headerName: 'Amount', minWidth: 270, flex : 0.5 , type:"number"},
     { field: 'actions', headerName: 'Actions', minWidth: 150,  type:"number", sortable:false,
       renderCell: (params)=>{
-        console.log(params)
         return(
           <Link to={`/order/${params.row.id}`}>
             <LaunchIcon/>
