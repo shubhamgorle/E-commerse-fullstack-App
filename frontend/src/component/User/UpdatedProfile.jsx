@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { UPDATE_PROFILE_RESET } from '../../constatnce/userConstants';
 const UpdatedProfile = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const alert = useAlert();
     const { user } = useSelector(state => state.user);
     const { error, isUpdated, loading } = useSelector(state => state.profile);

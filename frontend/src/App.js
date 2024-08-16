@@ -29,10 +29,10 @@ import {loadStripe} from "@stripe/stripe-js"
 import OrderSuccess from './component/Cart/OrderSuccess.jsx';
 import MyOrders from './component/Orders/MyOrders.jsx';
 import OrderDetails from './component/Orders/OrderDetails.jsx';
-
+import DashBoard from './component/admin/DashBoard.jsx';
+import ProductsList from './component/admin/ProductsList.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
-
     const [stripeApiKey, setStripeApiKey] = useState("");
 
     async function getStripeApiKey(){
@@ -60,9 +60,9 @@ function App() {
           <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
           <Route exact path='/search' element={<Search />} />
-          <Route exact path='/account' element={isAuthenticated &&<Profile/>} />
+          <Route exact path='/account' element={isAuthenticated && <Profile/>} />
           <Route exact path='/login' element={<LoginSignup />} />
-          <Route exact path='/me/update' element={isAuthenticated &&<UpdatedProfile/>} />
+          <Route exact path='/me/update' element={isAuthenticated && <UpdatedProfile/>} />
           <Route exact path='/password/update' element={isAuthenticated && <UpdatePassword/>} />
           <Route exact path='/password/forgot' element={<ForgotPassword/>}/>
           <Route exact path='/password/reset/:token' element={<ResetPassword/>}/>
@@ -71,11 +71,13 @@ function App() {
           {
             stripeApiKey && <Route exact path='/process/payment' element={isAuthenticated && <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>} />
           }
-          <Route exact path='/success' element={isAuthenticated && <OrderSuccess/>} />
+          <Route exact path='/success' element={isAuthenticated && <OrderSuccess/>}/>
           <Route exact path='/orders' element={isAuthenticated && <MyOrders/>} />
-          <Route exact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>} />
-          <Route exact path='/order/:id' element={isAuthenticated && <OrderDetails/>} />
-          
+          <Route exact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>}/>
+          <Route exact path='/order/:id' element={isAuthenticated && <OrderDetails/>}/>
+          {/* admin routed need to be ptotected as isAdmin---> i will handle it later */}
+          <Route exact path='/admin/dashboard' element={isAuthenticated && <DashBoard/>}/>
+          <Route exact path='/admin/products' element={isAuthenticated && <ProductsList/>}/>
         </Routes>
         <Footer />
       </Router>

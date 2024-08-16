@@ -9,11 +9,14 @@ import {
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_RESET,
     NEW_REVIEW_FAIL,
-    NEW_REVIEW_REQUEST
+    NEW_REVIEW_REQUEST,
+    ADMIN_PRODUCT_FAIL,
+    ADMIN_PRODUCT_REQUEST,
+    ADMIN_PRODUCT_SUCCESS
 } from "../constatnce/productConstant";
 
 export const productReducer = ((state = { products: [] }, action) => {
-    if (action.type === ALL_PRODUCT_REQUEST) {
+    if (action.type === ALL_PRODUCT_REQUEST || action.type === ADMIN_PRODUCT_REQUEST ) {
         return {
             loading: true,
             products: []
@@ -28,7 +31,13 @@ export const productReducer = ((state = { products: [] }, action) => {
             filterdProductCount: action.payload.filterdProductCount
         }
     }
-    else if (action.type === ALL_PRODUCT_FAIL) {
+    else if(action.type === ADMIN_PRODUCT_SUCCESS){
+        return{
+            loading: false,
+            products:action.payload
+        }
+    }
+    else if (action.type === ALL_PRODUCT_FAIL || action.type === ADMIN_PRODUCT_FAIL) {
         return {
             loading: false,
             error: action.payload
