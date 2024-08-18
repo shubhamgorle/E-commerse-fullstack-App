@@ -11,9 +11,16 @@ import {
     NEW_REVIEW_REQUEST,
     ADMIN_PRODUCT_FAIL,
     ADMIN_PRODUCT_REQUEST,
-    ADMIN_PRODUCT_SUCCESS
+    ADMIN_PRODUCT_SUCCESS,
+    NEW_PRODUCT_FAIL,
+    NEW_PRODUCT_REQUEST,
+    NEW_PRODUCT_SUCCESS
 } from "../constatnce/productConstant";
+
 import axios from 'axios'
+
+
+// GET PRODUCT -----> USER
 export const getProduct = (keyword = "", currentPage=1, price=[0, 50000], category, ratings=0) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
@@ -89,9 +96,28 @@ export const newReview = (reviewData) => async (dispatch) => {
             payload: data.success
         })
     } catch (error) {
-        console.log(error)
         dispatch({
             type: NEW_REVIEW_FAIL,
+            payload: error
+        })
+    }
+}
+
+// Create product ---> Admin
+export const createProduct = (productData) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {"Content-Type" : "application/json" }
+        }
+        dispatch({ type: NEW_PRODUCT_REQUEST });
+        let {data} = await axios.post(`/api/v1/admin/product/new`,productData, config);
+        dispatch({
+            type: NEW_PRODUCT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: NEW_PRODUCT_FAIL,
             payload: error
         })
     }

@@ -31,6 +31,7 @@ import MyOrders from './component/Orders/MyOrders.jsx';
 import OrderDetails from './component/Orders/OrderDetails.jsx';
 import DashBoard from './component/admin/DashBoard.jsx';
 import ProductsList from './component/admin/ProductsList.jsx';
+import NewProduct from './component/admin/NewProduct.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
     const [stripeApiKey, setStripeApiKey] = useState("");
@@ -78,6 +79,7 @@ function App() {
           {/* admin routed need to be ptotected as isAdmin---> i will handle it later */}
           <Route exact path='/admin/dashboard' element={isAuthenticated && <DashBoard/>}/>
           <Route exact path='/admin/products' element={isAuthenticated && <ProductsList/>}/>
+          <Route exact path='/admin/product' element={isAuthenticated && <NewProduct/>}/>
         </Routes>
         <Footer />
       </Router>

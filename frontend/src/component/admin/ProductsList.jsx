@@ -36,7 +36,7 @@ const ProductsList = () => {
   products.forEach((item, index)=>{
      rows.push({
          id:item._id,
-         stock : item.name,
+         stock : item.stock,
          price:item.price,
          name:item.name
      })
@@ -64,7 +64,6 @@ const ProductsList = () => {
                 disableRowSelectionOnClick
                 className='productListTable'
                 autoHeight
-                
                 />
             </div>
         </div>
