@@ -39,18 +39,18 @@ const NewProduct = () => {
   ]
 
   useEffect(() => {
-    if (error) {
+    if(error) {
       alert.error(error);
       dispatch(clearErrors())
     }
-    if (success) {
+    if(success) {
       alert.success("Product Created Successfully");
       navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET })
     }
   }, [dispatch, alert, error, success, navigate]);
 
-const createProductSubmitHandler = (e) =>{
+  const createProductSubmitHandler = (e) => {
     e.preventDefault();
     const myForm = new FormData();
     myForm.set("name", name);
@@ -58,28 +58,30 @@ const createProductSubmitHandler = (e) =>{
     myForm.set("description", description);
     myForm.set("category", category);
     myForm.set("stock", stock);
-    
-    images.forEach((image)=>{
-       myForm.append("images", image)
-    })
-    dispatch(createProduct(myForm))
-}
 
-const createProductImagesChange = (e) => {
+    images.forEach((image) =>{
+      myForm.append("Images", image)
+    })
+   console.log(myForm)
+    dispatch(createProduct(myForm))
+  }
+
+  const createProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
     setImages([]);
     setImagesPreview([]);
-    
-    files.forEach((file)=>{
-      const reader = new FileReader()
 
-    if(reader.readyState === 2){
-      setImagesPreview((old)=>[...old, reader.result]);
-      setImages((old)=>[...old, reader.result])
-    }
+    files.forEach((file) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImagesPreview((old) => [...old, reader.result]);
+          setImages((old) => [...old, reader.result])
+        }
+      }
       reader.readAsDataURL(file)
     })
-}
+  }
 
 
   return (
@@ -150,13 +152,13 @@ const createProductImagesChange = (e) => {
                 type="file"
                 name='avatar'
                 multiple
-                accept='image/*' 
+                accept='image/*'
                 onChange={createProductImagesChange}
-                />
+              />
             </div>
             <div id="createProductFormImage">
               {
-                imagesPreview.map((image, index) => (
+              imagesPreview && imagesPreview.map((image, index) => (
                   <img src={image} alt="Avatar Preview" key={index} />
                 ))
               }

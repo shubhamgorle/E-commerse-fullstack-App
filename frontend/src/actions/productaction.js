@@ -105,17 +105,20 @@ export const newReview = (reviewData) => async (dispatch) => {
 
 // Create product ---> Admin
 export const createProduct = (productData) => async (dispatch) => {
+    console.log(productData)
     try {
         const config = {
             headers: {"Content-Type" : "application/json" }
         }
         dispatch({ type: NEW_PRODUCT_REQUEST });
         let {data} = await axios.post(`/api/v1/admin/product/new`,productData, config);
+        console.log(data)
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
             payload: data
         })
     } catch (error) {
+        console.log(error)
         dispatch({
             type: NEW_PRODUCT_FAIL,
             payload: error
