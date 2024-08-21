@@ -10,6 +10,7 @@ import { myOrdersReducer } from './reducers/orderReducer';
 import { orderDetailsReducer } from './reducers/orderReducer';
 import { newReviewReducer } from './reducers/productreducer';
 import { newProductReducer } from './reducers/productreducer';
+import { deleteProductReducer } from './reducers/productreducer';
 const reducer = combineReducers({
     products:productReducer,
     productDetails:productDetailReducer,
@@ -21,7 +22,8 @@ const reducer = combineReducers({
     myOrders:myOrdersReducer,
     orderDetails:orderDetailsReducer,
     newReview:newReviewReducer,
-    newProduct:newProductReducer
+    newProduct:newProductReducer,
+    deleteProduct:deleteProductReducer,
 });
 let initialstate = {
     cart:{

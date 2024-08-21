@@ -241,7 +241,7 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
 
 
   const user = await User.findById(req.params.id);
-  console.log("s", user)
+  // console.log("s", user)
   // we will remove cloudinary later
   if (!user) {
     return next(new ErrorHandler(`User does not exist with id :${req.params.id}`, 404))

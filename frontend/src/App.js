@@ -32,6 +32,7 @@ import OrderDetails from './component/Orders/OrderDetails.jsx';
 import DashBoard from './component/admin/DashBoard.jsx';
 import ProductsList from './component/admin/ProductsList.jsx';
 import NewProduct from './component/admin/NewProduct.jsx';
+import UpdateProduct from './component/admin/UpdateProduct.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
     const [stripeApiKey, setStripeApiKey] = useState("");
@@ -80,6 +81,7 @@ function App() {
           <Route exact path='/admin/dashboard' element={isAuthenticated && <DashBoard/>}/>
           <Route exact path='/admin/products' element={isAuthenticated && <ProductsList/>}/>
           <Route exact path='/admin/product' element={isAuthenticated && <NewProduct/>}/>
+          <Route exact path='/admin/product/:id' element={isAuthenticated && <UpdateProduct/>}/>
         </Routes>
         <Footer />
       </Router>
