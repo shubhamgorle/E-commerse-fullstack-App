@@ -7,6 +7,8 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Doughnut, Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { getAllOrders } from '../../actions/orderAction.js';
+import { getAllUsers } from '../../actions/userActions.js';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,6 +23,9 @@ ChartJS.register(
 const DashBoard = () => {
   const dispatch = useDispatch();
   const { products} = useSelector((state)=>state.products);
+  const { orders} = useSelector((state)=>state.allOrders);
+  const { users } = useSelector((state)=>state.allUsers)
+
 
    var outOfStock = 0;
    products && 
@@ -31,6 +36,8 @@ const DashBoard = () => {
    });
   useEffect(()=>{
       dispatch(getAdminProducts())
+      dispatch(getAllOrders())
+      dispatch(getAllOrders())
   },[dispatch])
 
   const lineState = {
@@ -76,12 +83,12 @@ const DashBoard = () => {
 
             <Link to='/admin/orders'>
               <p>Orders</p>
-              <p>4</p>
+              <p>{orders && orders.length}</p>
             </Link>
 
             <Link to='/admin/users'>
               <p>Users</p>
-              <p>2</p>
+              <p>{users.length}</p>
             </Link>
           </div>
         </div>

@@ -11,6 +11,10 @@ import { orderDetailsReducer } from './reducers/orderReducer';
 import { newReviewReducer } from './reducers/productreducer';
 import { newProductReducer } from './reducers/productreducer';
 import { deleteProductReducer } from './reducers/productreducer';
+import { orderReducer } from './reducers/orderReducer';
+import { allOrdersReducer } from './reducers/orderReducer';
+import { AllUsersReducer } from './reducers/userReducer';
+import { userDetailsReducer } from './reducers/userReducer';
 const reducer = combineReducers({
     products:productReducer,
     productDetails:productDetailReducer,
@@ -24,6 +28,10 @@ const reducer = combineReducers({
     newReview:newReviewReducer,
     newProduct:newProductReducer,
     deleteProduct:deleteProductReducer,
+    allOrders:allOrdersReducer,
+    order:orderReducer,
+    allUsers:AllUsersReducer,
+    userDetails:userDetailsReducer
 });
 let initialstate = {
     cart:{

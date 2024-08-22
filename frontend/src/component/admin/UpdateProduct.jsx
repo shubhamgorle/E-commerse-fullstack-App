@@ -107,7 +107,7 @@ const UpdateProduct = () => {
   return (
     <Fragment>
     { loading ? <Loader/> : <Fragment>
-      <Metadata title="Create Product" />
+      <Metadata title="Update Product" />
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">

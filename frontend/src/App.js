@@ -33,13 +33,20 @@ import DashBoard from './component/admin/DashBoard.jsx';
 import ProductsList from './component/admin/ProductsList.jsx';
 import NewProduct from './component/admin/NewProduct.jsx';
 import UpdateProduct from './component/admin/UpdateProduct.jsx';
+import OrdersList from './component/admin/OrdersList.jsx';
+import ProcessOrder from './component/admin/ProcessOrder.jsx';
+import UsersList from './component/admin/UsersList.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
     const [stripeApiKey, setStripeApiKey] = useState("");
 
     async function getStripeApiKey(){
-    const {data} = await axios.get("/api/v1/stripeapikey");
-    setStripeApiKey(data.stripeApiKey);
+    try {
+      const {data} = await axios.get("/api/v1/stripeapikey");
+      setStripeApiKey(data.stripeApiKey);
+    } catch (error) {
+      console.log(error)
+    }
     }
 
   useEffect(() => {
@@ -82,6 +89,9 @@ function App() {
           <Route exact path='/admin/products' element={isAuthenticated && <ProductsList/>}/>
           <Route exact path='/admin/product' element={isAuthenticated && <NewProduct/>}/>
           <Route exact path='/admin/product/:id' element={isAuthenticated && <UpdateProduct/>}/>
+          <Route exact path='/admin/orders' element={isAuthenticated && <OrdersList/>}/>
+          <Route exact path='/admin/order/:id' element={isAuthenticated && <ProcessOrder/>}/>
+          <Route exact path='/admin/users' element={isAuthenticated && <UsersList/>}/>
         </Routes>
         <Footer />
       </Router>

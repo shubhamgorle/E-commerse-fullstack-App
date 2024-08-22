@@ -15,7 +15,19 @@ import {
   FORGOT_PASSWORD_REQUEST,
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS
+  RESET_PASSWORD_SUCCESS,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
+  ALL_USERS_FAIL,
+  USERS_DETAILS_REQUEST,
+  USERS_DETAILS_SUCCESS,
+  USERS_DETAILS_FAIL,
+  UPDATE_USERS_REQUEST,
+  UPDATE_USERS_SUCCESS,
+  UPDATE_USERS_FAIL,
+  DELETE_USERS_REQUEST,
+  DELETE_USERS_SUCCESS,
+  DELETE_USERS_FAIL,
 } from "../constatnce/userConstants";
 import axios from "axios";
 
@@ -115,6 +127,54 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 }
 
 
+//get all users ---> admin
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_USERS_REQUEST })
+    const { data } = await axios.get(`/api/v1/admin/users`)
+    dispatch({ type: ALL_USERS_SUCCESS, payload: data.users })
+  } catch (error) {
+    dispatch({ type: ALL_USERS_FAIL, payload: error.response.data.message })
+  }
+}
+
+// get user details ---> admin
+
+export const getUserDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: USERS_DETAILS_REQUEST })
+    const { data } = await axios.get(`/api/v1/admin/user/${id}`)
+    dispatch({ type: USERS_DETAILS_SUCCESS, payload: data.user })
+  } catch (error) {
+    dispatch({ type: USERS_DETAILS_FAIL, payload: error.response.data.message })
+  }
+}
+
+// Update user ---> admin
+
+export const updateUser = (id, userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_USERS_REQUEST})
+    const config = { headers: { "Content-Type": "application/json" } }
+    const { data } = await axios.put(`/api/v1/admin/user/${id}`, userData, config)
+    dispatch({ type: UPDATE_USERS_SUCCESS, payload: data.success })
+  } catch (error) {
+    dispatch({ type: UPDATE_USERS_FAIL, payload: error.response.data.message })
+  }
+}
+
+// delete user ---> admin
+
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_USERS_REQUEST})
+    const { data } = await axios.delete(`/api/v1/admin/user/${id}`)
+    dispatch({ type: DELETE_USERS_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({ type: DELETE_USERS_FAIL, payload: error.response.data.message })
+  }
+}
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS })
 }
