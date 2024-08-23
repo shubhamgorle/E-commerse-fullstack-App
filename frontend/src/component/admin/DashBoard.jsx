@@ -37,7 +37,7 @@ const DashBoard = () => {
   useEffect(()=>{
       dispatch(getAdminProducts())
       dispatch(getAllOrders())
-      dispatch(getAllOrders())
+      dispatch(getAllUsers())
   },[dispatch])
 
   const lineState = {

@@ -86,13 +86,13 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
     // images start here
     let images = [];
-    if(typeof (req.body.images) === "string"){
+    if (typeof (req.body.images) === "string") {
         images.push(req.body.images);
     } else {
         images = req.body.images;
     }
     const imagesLinks = [];
-    if(images !== undefined) {
+    if (images !== undefined) {
         // Deleting Images From Cloudinary
         for (let i = 0; i < product.Images.length; i++) {
             await cloudinary.v2.uploader.destroy(
@@ -104,7 +104,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
             const result = await cloudinary.v2.uploader.upload(images[i], {
                 folder: "products",
             });
-    
+
             imagesLinks.push({
                 public_id: result.public_id,
                 url: result.secure_url,
@@ -112,9 +112,9 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
         }
         req.body.Images = imagesLinks;
     }
-    
 
-   
+
+
     // req.body.user = req.user.id;
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
@@ -230,7 +230,13 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
     reviews.forEach(rev => {
         avg = avg + rev.rating
     })
-    const ratings = avg / reviews.length;
+    let ratings = 0;
+    if (reviews.length === 0) {
+        ratings = 0;
+    } else {
+        ratings = avg / reviews.length;
+    }
+
     const numOfReviews = reviews.length;
 
     await Product.findByIdAndUpdate(req.query.productId, {

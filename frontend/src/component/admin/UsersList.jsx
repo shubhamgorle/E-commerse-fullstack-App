@@ -17,7 +17,7 @@ const UsersList = () => {
     const alert = useAlert();
     const navigate = useNavigate()
     const {error, users, loading} = useSelector((state)=>state.allUsers)
-     const { isDeleted, error:deleteError, message} = useSelector((state)=>state.profile)
+     const { isDeleted, error:deleteError, message, loading:deleteLoading} = useSelector((state)=>state.profile)
 
     const deleteUserHandler = (id) =>{
       dispatch(deleteUser(id))
@@ -75,20 +75,22 @@ const UsersList = () => {
       {
         loading ? <Loader/> : <Fragment>
         <Metadata title={`ALL USERS - Admin`}/>
-        <div className="dashboard">
-            <SideBar/>
-            <div className="productsListContainer">
-                <h1 id="productListHeading">ALL USERS</h1>
-                <DataGrid
-                rows={rows}
-                columns={columns}
-                pageSize={10}
-                disableRowSelectionOnClick
-                className='productListTable'
-                autoHeight
-                />
-            </div>
-        </div>
+        {
+          deleteLoading ? <Loader/> : <div className="dashboard">
+          <SideBar/>
+          <div className="productsListContainer">
+              <h1 id="productListHeading">ALL USERS</h1>
+              <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={10}
+              disableRowSelectionOnClick
+              className='productListTable'
+              autoHeight
+              />
+          </div>
+      </div>
+        }
      </Fragment>
       }
       </Fragment>
