@@ -13,3 +13,10 @@ day 3 ---> Search, Filter, pagination
 
 
 Note---> flow---> m-c-r ---> models, controller, route ---> app.js 
+
+
+
+
+responsiveness of table-admin
+/about /contact 
+rupees icon in form instaed of doler

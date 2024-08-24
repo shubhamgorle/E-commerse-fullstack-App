@@ -28,7 +28,6 @@ const NewProduct = () => {
   const [stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-  console.log("l",loading)
   const categories = [
     "Laptop",
     "Footwear",
@@ -63,7 +62,6 @@ const NewProduct = () => {
     images.forEach((image) =>{
       myForm.append("images", image)
     })
-   console.log(myForm)
     dispatch(createProduct(myForm))
   }
 
@@ -88,7 +86,7 @@ const NewProduct = () => {
   return (
     <Fragment>
     { loading ? <Loader/> : <Fragment>
-      <Metadata title="Create Product" />
+      <Metadata title="Create Product - Admin" />
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">

@@ -12,7 +12,6 @@ const ProductCard = ({product}) => {
     value:product.ratings,
     isHalf:true
 }
-console.log(options.size)
   return (
     <Link className='productCard' to={`/product/${product._id}`}>
     <img src={product.Images[0].url} alt={product.name} />

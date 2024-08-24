@@ -52,7 +52,6 @@ userSchema.pre("save", async function (next){
         next();
     }
     this.password = await bcrypt.hash(this.password, 10);
-    // console.log("working",this.password)
 })
 
 // JWt token;
@@ -81,6 +80,5 @@ const resettoken = crypto.randomBytes(20).toString("hex");
    return resettoken;
 }
 
-// console.log(process.env.JWT_EXPIRE)
 module.exports = mongoose.model("User", userSchema)
 // uerSchema

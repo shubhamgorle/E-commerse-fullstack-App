@@ -14,7 +14,7 @@ import { loadUser } from './actions/userActions.js';
 import UserOption from './component/layout/Header/UserOption.jsx';
 import { useSelector } from 'react-redux';
 import Profile from './component/User/Profile.jsx';
-// import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
+import ProtectedRoute from './component/Route/ProtectedRoute.jsx';
 import UpdatedProfile from './component/User/UpdatedProfile.jsx';
 import UpdatePassword from './component/User/UpdatePassword.jsx';
 import ForgotPassword from './component/User/ForgotPassword.jsx';
@@ -24,8 +24,8 @@ import Shipping from './component/Cart/Shipping.jsx';
 import ConfirmOrder from './component/Cart/ConfirmOrder.jsx';
 import axios from 'axios';
 import Payment from './component/Cart/Payment.jsx';
-import {Elements} from "@stripe/react-stripe-js"
-import {loadStripe} from "@stripe/stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import OrderSuccess from './component/Cart/OrderSuccess.jsx';
 import MyOrders from './component/Orders/MyOrders.jsx';
 import OrderDetails from './component/Orders/OrderDetails.jsx';
@@ -40,16 +40,16 @@ import UpdateUser from './component/admin/UpdateUser.jsx';
 import ProductReviews from './component/admin/ProductReviews.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
-    const [stripeApiKey, setStripeApiKey] = useState("");
+  const [stripeApiKey, setStripeApiKey] = useState("");
 
-    async function getStripeApiKey(){
+  async function getStripeApiKey() {
     try {
-      const {data} = await axios.get("/api/v1/stripeapikey");
+      const { data } = await axios.get("/api/v1/stripeapikey");
       setStripeApiKey(data.stripeApiKey);
     } catch (error) {
       console.log(error)
     }
-    }
+  }
 
   useEffect(() => {
     WebFont.load({
@@ -60,43 +60,55 @@ function App() {
     store.dispatch(loadUser());
     getStripeApiKey();
   }, [])
+
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <>
       <Router>
         <Header />
         {isAuthenticated && <UserOption user={user} />}
+
         <Routes>
           <Route exact path='/' element={<Home />} />
+          <Route
+            path="/process/payment"
+            element={
+              stripeApiKey ? (
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <ProtectedRoute element={Payment} />
+                </Elements>
+              ) : null
+            } />
           <Route exact path='/product/:id' element={<ProductDetails />} />
           <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
           <Route exact path='/search' element={<Search />} />
-          <Route exact path='/account' element={isAuthenticated && <Profile/>} />
+          <Route exact path='/account' element={<ProtectedRoute element={Profile} />} />
           <Route exact path='/login' element={<LoginSignup />} />
-          <Route exact path='/me/update' element={isAuthenticated && <UpdatedProfile/>} />
-          <Route exact path='/password/update' element={isAuthenticated && <UpdatePassword/>} />
-          <Route exact path='/password/forgot' element={<ForgotPassword/>}/>
-          <Route exact path='/password/reset/:token' element={<ResetPassword/>}/>
-          <Route exact path='/cart' element={<Cart/>}/>
-          <Route exact path='/shipping' element={isAuthenticated && <Shipping/>} />
-          {
-            stripeApiKey && <Route exact path='/process/payment' element={isAuthenticated && <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>} />
-          }
-          <Route exact path='/success' element={isAuthenticated && <OrderSuccess/>}/>
-          <Route exact path='/orders' element={isAuthenticated && <MyOrders/>} />
-          <Route exact path='/order/confirm' element={isAuthenticated && <ConfirmOrder/>}/>
-          <Route exact path='/order/:id' element={isAuthenticated && <OrderDetails/>}/>
+          <Route exact path='/me/update' element={<ProtectedRoute element={UpdatedProfile} />} />
+          <Route exact path='/password/update' element={<ProtectedRoute element={UpdatePassword} />} />
+          <Route exact path='/password/forgot' element={<ForgotPassword />} />
+          <Route exact path='/password/reset/:token' element={<ResetPassword />} />
+          <Route exact path='/cart' element={<Cart />} />
+          <Route exact path='/shipping' element={<ProtectedRoute element={Shipping} />} />
+          {/* {
+            stripeApiKey && <Route exact path='/process/payment' element={<ProtectedRoute element={<Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>}/> } />
+          } */}
+          <Route exact path='/success' element={<ProtectedRoute element={OrderSuccess} />} />
+          <Route path='/orders' element={<ProtectedRoute element={MyOrders} />} />
+          <Route exact path='/order/confirm' element={<ProtectedRoute element={ConfirmOrder} />} />
+          <Route exact path='/order/:id' element={<ProtectedRoute element={OrderDetails} />} />
           {/* admin routed need to be ptotected as isAdmin---> i will handle it later */}
-          <Route exact path='/admin/dashboard' element={isAuthenticated && <DashBoard/>}/>
-          <Route exact path='/admin/products' element={isAuthenticated && <ProductsList/>}/>
-          <Route exact path='/admin/product' element={isAuthenticated && <NewProduct/>}/>
-          <Route exact path='/admin/product/:id' element={isAuthenticated && <UpdateProduct/>}/>
-          <Route exact path='/admin/orders' element={isAuthenticated && <OrdersList/>}/>
-          <Route exact path='/admin/order/:id' element={isAuthenticated && <ProcessOrder/>}/>
-          <Route exact path='/admin/users' element={isAuthenticated && <UsersList/>}/> 
-          <Route exact path='/admin/user/:id' element={isAuthenticated && <UpdateUser/>}/>
-          <Route exact path='/admin/reviews' element={isAuthenticated && <ProductReviews/>}/>
-          </Routes>
+          <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} element={DashBoard} />} />
+          <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} element={ProductsList} />} />
+          <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} element={NewProduct} />} />
+          <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} element={UpdateProduct} />} />
+          <Route exact path='/admin/orders' element={<ProtectedRoute isAdmin={true} element={OrdersList} />} />
+          <Route exact path='/admin/order/:id' element={<ProtectedRoute isAdmin={true} element={ProcessOrder} />} />
+          <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true} element={UsersList} />} />
+          <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true} element={UpdateUser} />} />
+          <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} element={ProductReviews} />} />
+        </Routes>
         <Footer />
       </Router>
     </>

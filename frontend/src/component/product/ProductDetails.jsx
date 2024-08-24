@@ -82,7 +82,6 @@ const ProductDetails = () => {
         if (success) {
             alert.success("Review Submitted Successfully");
             dispatch({ type: NEW_REVIEW_RESET });
-            console.log("shubhams")
         }
         dispatch(getProductDetails(id))
     }, [dispatch, id, alert, error, success, reviewError])

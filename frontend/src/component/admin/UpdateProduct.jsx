@@ -82,7 +82,6 @@ const UpdateProduct = () => {
     images.forEach((image) =>{
       myForm.append("images", image)
     })
-   console.log(myForm)
     dispatch(updateProduct(id, myForm))
   }
 

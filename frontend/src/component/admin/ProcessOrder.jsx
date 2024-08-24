@@ -24,7 +24,6 @@ const ProcessOrder = () => {
         e.preventDefault();
         const myForm = new FormData();
         myForm.set("status", status);
-       console.log(myForm)
         dispatch(updateOrder(id, myForm))
     }
    

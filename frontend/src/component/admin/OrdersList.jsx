@@ -41,7 +41,6 @@ const OrdersList = () => {
   ]
   
   const rows = [];
-  console.log(orders)
   orders &&
   orders.forEach((item, index)=>{
      rows.push({
@@ -85,6 +84,11 @@ const OrdersList = () => {
                 disableRowSelectionOnClick
                 className='productListTable'
                 autoHeight
+                initialState={{
+                    pagination: {
+                      paginationModel: { pageSize: 9, page: 0 },
+                    },
+                  }}
                 />
             </div>
         </div>

@@ -119,6 +119,11 @@ const ProductReviews = () => {
                                 disableRowSelectionOnClick
                                 className='productListTable'
                                 autoHeight
+                                initialState={{
+                                    pagination: {
+                                      paginationModel: { pageSize: 9, page: 0 },
+                                    },
+                                  }}
                             />  
                             ) :
                             (

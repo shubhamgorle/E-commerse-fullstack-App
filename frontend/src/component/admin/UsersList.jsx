@@ -83,10 +83,14 @@ const UsersList = () => {
               <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={10}
+              pageSize={5}
               disableRowSelectionOnClick
               className='productListTable'
-              autoHeight
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 9, page: 0 },
+                },
+              }}
               />
           </div>
       </div>
