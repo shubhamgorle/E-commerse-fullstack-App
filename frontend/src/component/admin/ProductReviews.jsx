@@ -116,7 +116,6 @@ const ProductReviews = () => {
                                 <DataGrid
                                 rows={rows}
                                 columns={columns}
-                                pageSize={10}
                                 disableRowSelectionOnClick
                                 className='productListTable'
                                 autoHeight
@@ -125,6 +124,7 @@ const ProductReviews = () => {
                                       paginationModel: { pageSize: 9, page: 0 },
                                     },
                                   }}
+                                  pageSizeOptions={[9]} 
                             />  
                             ) :
                             (

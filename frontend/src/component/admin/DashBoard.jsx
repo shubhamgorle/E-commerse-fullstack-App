@@ -40,6 +40,10 @@ const DashBoard = () => {
       dispatch(getAllUsers())
   },[dispatch])
 
+  let totalAmount = 0;
+ orders && orders.forEach((item)=>{
+  totalAmount += item.totalPrice
+ })
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -47,7 +51,7 @@ const DashBoard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197,72,49"],
-        data: [0, 4000]
+        data: [0, totalAmount]
       }
     ],
   }
@@ -71,7 +75,7 @@ const DashBoard = () => {
         <div className="dashboardSummary">
           <div>
             <p>
-              Total Amount <br /> <span>&#8377;  2000</span>
+              Total Amount <br /> <span>&#8377;{totalAmount.toFixed(2)}</span>
             </p>
           </div>
 

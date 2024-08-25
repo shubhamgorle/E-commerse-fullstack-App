@@ -60,15 +60,15 @@ useEffect(()=>{
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={20}
               disableRowSelectionOnClick
               className='myOrdersTable'
               autoHeight
               initialState={{
                 pagination: {
-                  paginationModel: { pageSize: 10, page: 0 },
+                  paginationModel: { pageSize: 9, page: 0 },
                 },
               }}
+              pageSizeOptions={[9]} 
             />
             <div id='myOrdersHeading'>{user.name}'s Orders</div>
           </div>

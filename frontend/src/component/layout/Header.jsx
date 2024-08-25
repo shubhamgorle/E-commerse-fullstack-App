@@ -6,7 +6,8 @@ import {MdSearch } from "react-icons/md";
 import {MdAddShoppingCart } from "react-icons/md";
 const Header = () => {
     const options = {
-        burgerColorHover: "#eb4034",
+        burgerColorHover: "red",
+        burgerColor:"tomato",
         logo,
         logoWidth: "20vmax",
         navColor1: 'white',

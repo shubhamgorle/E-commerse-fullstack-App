@@ -40,6 +40,7 @@ import UpdateUser from './component/admin/UpdateUser.jsx';
 import ProductReviews from './component/admin/ProductReviews.jsx';
 import About from './component/layout/About/About.jsx';
 import ContactSection from './component/layout/Contact/ContactSection.jsx';
+import NotFound from './component/layout/NotFound/NotFound.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -108,6 +109,7 @@ function App() {
           <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true} element={UsersList} />} />
           <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true} element={UpdateUser} />} />
           <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} element={ProductReviews} />} />
+          <Route path = "*" element={<NotFound/>}/>
         </Routes>
         <Footer />
       </Router>
