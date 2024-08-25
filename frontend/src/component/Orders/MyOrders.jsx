@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/loader/Loader';
 import { Link } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import { Typography } from '@mui/material';
 import Metadata from '../layout/Metadata';
 import LaunchIcon from "@material-ui/icons/Launch"
 
@@ -61,12 +60,17 @@ useEffect(()=>{
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={2}
+              pageSize={20}
               disableRowSelectionOnClick
               className='myOrdersTable'
               autoHeight
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 10, page: 0 },
+                },
+              }}
             />
-            <Typography id='myOrdersHeading'>{user.name}'s Orders</Typography>
+            <div id='myOrdersHeading'>{user.name}'s Orders</div>
           </div>
         )
       }

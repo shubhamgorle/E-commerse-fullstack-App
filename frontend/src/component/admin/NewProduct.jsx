@@ -9,7 +9,7 @@ import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import StorageIcon from "@material-ui/icons/Storage";
 import DescriptionIcon from "@material-ui/icons/Description";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import SideBar from './SideBar';
 import Loader from '../layout/loader/Loader';
 import { useNavigate } from 'react-router-dom';
@@ -108,7 +108,7 @@ const NewProduct = () => {
             </div>
 
             <div>
-              <AttachMoneyIcon />
+              <CurrencyRupeeIcon />
               <input type="number"
                 placeholder='Price'
                 required

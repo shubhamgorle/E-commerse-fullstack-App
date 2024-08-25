@@ -12,9 +12,9 @@
     top: 0;
 }
 
-#myOrdersHeading {
+#myOrdersHeading{
     text-align: center;
-    font: 400 1.2vmax "Roboto";
+    font: 400 1.2vmax cursive;
     transition: all 0.5s;
     background-color: rgb(44, 44, 44);
     color: rgb(255, 255, 255);

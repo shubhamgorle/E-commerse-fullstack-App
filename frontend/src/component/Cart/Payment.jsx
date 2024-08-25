@@ -41,7 +41,7 @@ const Payment = () => {
 
    const submitHandler = async (e) => {
       e.preventDefault();
-      payBtn.current.disable = true;
+      payBtn.current.disabled = true;
       try {
          const config = {
             headers: { "Content-Type": "application/json" }
@@ -67,7 +67,7 @@ const Payment = () => {
             }
          })
          if (result.error) {
-            payBtn.current.disable = false;
+            payBtn.current.disabled = false;
             alert.error(result.error.message)
          }
          else{
@@ -86,7 +86,7 @@ const Payment = () => {
       } 
       
       catch (error) {
-         payBtn.current.disable = false;
+         payBtn.current.disabled = false;
          alert.error(error.response.data.message)
       }
    }
@@ -121,11 +121,7 @@ const Payment = () => {
                   <VpnKeyIcon />
                   <CardCvcElement className='paymentInput' />
                </div>
-               <input type="submit"
-                  value={`Pay - ${orderInfo && orderInfo.totalPrice}`}
-                  ref={payBtn}
-                  className='paymentFormBtn'
-               />
+               <button className='paymentFormBtn' ref={payBtn} type='submit'>Pay &#x20B9;{orderInfo && orderInfo.totalPrice}</button>
             </form>
          </div>
       </Fragment>

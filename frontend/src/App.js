@@ -38,6 +38,8 @@ import ProcessOrder from './component/admin/ProcessOrder.jsx';
 import UsersList from './component/admin/UsersList.jsx';
 import UpdateUser from './component/admin/UpdateUser.jsx';
 import ProductReviews from './component/admin/ProductReviews.jsx';
+import About from './component/layout/About/About.jsx';
+import ContactSection from './component/layout/Contact/ContactSection.jsx';
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
@@ -69,7 +71,9 @@ function App() {
         {isAuthenticated && <UserOption user={user} />}
 
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/' element={<Home/>} />
+          <Route exact path='/about' element={<About/>} />
+          <Route exact path='/contact' element={<ContactSection/>} />
           <Route
             path="/process/payment"
             element={
@@ -91,14 +95,10 @@ function App() {
           <Route exact path='/password/reset/:token' element={<ResetPassword />} />
           <Route exact path='/cart' element={<Cart />} />
           <Route exact path='/shipping' element={<ProtectedRoute element={Shipping} />} />
-          {/* {
-            stripeApiKey && <Route exact path='/process/payment' element={<ProtectedRoute element={<Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>}/> } />
-          } */}
           <Route exact path='/success' element={<ProtectedRoute element={OrderSuccess} />} />
           <Route path='/orders' element={<ProtectedRoute element={MyOrders} />} />
           <Route exact path='/order/confirm' element={<ProtectedRoute element={ConfirmOrder} />} />
           <Route exact path='/order/:id' element={<ProtectedRoute element={OrderDetails} />} />
-          {/* admin routed need to be ptotected as isAdmin---> i will handle it later */}
           <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} element={DashBoard} />} />
           <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} element={ProductsList} />} />
           <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} element={NewProduct} />} />

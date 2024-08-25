@@ -4,8 +4,11 @@
     background-color: rgb(255, 255, 255);
     border-left: 1px solid rgba(0, 0, 0, 0.158);
     height: 100vh;
+    overflow: auto;
   }
-  
+  /* .reviewsListTableContainer{
+    
+  } */
   .productReviewsForm {
     width: 20rem;
     display: flex;

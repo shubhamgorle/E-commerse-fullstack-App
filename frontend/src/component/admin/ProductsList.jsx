@@ -78,7 +78,7 @@ const ProductsList = () => {
                 <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
+                pageSize={2}
                 disableRowSelectionOnClick
                 className='productListTable'
                 autoHeight
