@@ -36,9 +36,10 @@ import axios from 'axios'
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 50000], category, ratings = 0) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
-        let link = `api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]} &price[lte]=${price[1]}&ratings[gte]=${ratings}`
+        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`
+        
         if(category) {
-            link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]} &price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
+            link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`
         }
         let data = await axios.get(link);
         dispatch({
@@ -88,7 +89,6 @@ export const getProductDetails = (id) => async (dispatch) => {
             payload: data.data.product
         })
     } catch (error) {
-        console.log(error)
         dispatch({
             type: PRODUCT_DETAIL_FAIL,
             payload: error.response.data.message
@@ -124,13 +124,12 @@ export const createProduct = (productData) => async (dispatch) => {
         }
         dispatch({ type: NEW_PRODUCT_REQUEST });
         let { data } = await axios.post(`/api/v1/admin/product/new`, productData, config);
-        console.log(data)
+      
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
             payload: data
         })
     } catch (error) {
-        console.log(error)
         dispatch({
             type: NEW_PRODUCT_FAIL,
             payload: error.response.data.message
@@ -173,7 +172,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
             payload: data.success
         })
     } catch (error) {
-        console.log(error)
         dispatch({
             type: UPDATE_PRODUCT_FAIL,
             payload: error.response.data.message

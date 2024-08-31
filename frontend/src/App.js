@@ -48,12 +48,13 @@ function App() {
   async function getStripeApiKey() {
     try {
       const { data } = await axios.get("/api/v1/stripeapikey");
+
       setStripeApiKey(data.stripeApiKey);
     } catch (error) {
       console.log(error)
     }
   }
-
+ 
   useEffect(() => {
     WebFont.load({
       google: {
@@ -61,6 +62,7 @@ function App() {
       }
     })
     store.dispatch(loadUser());
+   
     getStripeApiKey();
   }, [])
 

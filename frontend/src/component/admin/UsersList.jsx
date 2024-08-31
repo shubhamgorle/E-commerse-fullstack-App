@@ -72,13 +72,14 @@ const UsersList = () => {
 
     return (
         <Fragment>
-      {
-        loading ? <Loader/> : <Fragment>
+      
         <Metadata title={`ALL USERS - Admin`}/>
         {
           deleteLoading ? <Loader/> : <div className="dashboard">
           <SideBar/>
-          <div className="productsListContainer">
+           {
+            loading ? <Loader/> :
+            <div className="productsListContainer">
               <h1 id="productListHeading">ALL USERS</h1>
               <DataGrid
               rows={rows}
@@ -93,10 +94,9 @@ const UsersList = () => {
               pageSizeOptions={[9]} 
               />
           </div>
+           }
       </div>
         }
-     </Fragment>
-      }
       </Fragment>
   )
 }

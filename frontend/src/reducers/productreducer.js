@@ -88,13 +88,13 @@ export const productDetailReducer = ((state = { product: {} }, action) => {
             product: action.payload,
         }
     }
-    else if (action.type === PRODUCT_DETAIL_FAIL) {
+    else if(action.type === PRODUCT_DETAIL_FAIL) {
         return {
             loading: false,
             error: action.payload
         }
     }
-    else if (action.type === CLEAR_ERRORS) {
+    else if(action.type === CLEAR_ERRORS) {
         return {
             ...state,
             error: null

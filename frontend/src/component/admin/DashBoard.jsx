@@ -1,4 +1,4 @@
-import React, {useEffect}from 'react'
+import React, {Fragment, useEffect}from 'react'
 import "./DashBoard.css"
 import SideBar from './SideBar.jsx'
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,8 @@ import { Doughnut, Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { getAllOrders } from '../../actions/orderAction.js';
 import { getAllUsers } from '../../actions/userActions.js';
+import Loader from '../layout/loader/Loader.jsx';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,8 +25,8 @@ ChartJS.register(
 const DashBoard = () => {
   const dispatch = useDispatch();
   const { products} = useSelector((state)=>state.products);
-  const { orders} = useSelector((state)=>state.allOrders);
-  const { users } = useSelector((state)=>state.allUsers)
+  const { orders,} = useSelector((state)=>state.allOrders);
+  const { users, loading } = useSelector((state)=>state.allUsers)
 
 
    var outOfStock = 0;
@@ -69,7 +71,9 @@ const DashBoard = () => {
   return (
     <div className="dashboard">
       <SideBar />
-      <div className="dashboardContainer">
+      {
+        loading ? <Loader/> : <Fragment>
+          <div className="dashboardContainer">
         <Typography component='h1'>Dashboard</Typography>
 
         <div className="dashboardSummary">
@@ -106,6 +110,8 @@ const DashBoard = () => {
         </div>
 
       </div>
+        </Fragment>
+      }
     </div>
   )
 }

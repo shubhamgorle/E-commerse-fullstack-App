@@ -16,8 +16,8 @@ const OrdersList = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const navigate = useNavigate()
-    const {error, orders} = useSelector((state)=>state.allOrders)
-     const {loading, isDeleted, error:deleteError} = useSelector((state)=>state.order)
+    const {error, orders, loading} = useSelector((state)=>state.allOrders)
+     const { isDeleted, error:deleteError} = useSelector((state)=>state.order)
 
     const deleteOrderHandler = (id) =>{
         dispatch(deleteOrder(id))
@@ -70,12 +70,12 @@ const OrdersList = () => {
 
     return (
         <Fragment>
-      {
-        loading ? <Loader/> : <Fragment>
         <Metadata title={`ALL ORDERS - Admin`}/>
         <div className="dashboard">
             <SideBar/>
-            <div className="productsListContainer">
+            {
+                loading ? <Loader/> :
+                <div className="productsListContainer">
                 <h1 id="productListHeading">ALL PRODUCTS</h1>
                 <DataGrid
                 rows={rows}
@@ -91,9 +91,8 @@ const OrdersList = () => {
                   pageSizeOptions={[9]} 
                 />
             </div>
-        </div>
-     </Fragment>
-      }
+            }
+        </div> 
       </Fragment>
   )
 }
