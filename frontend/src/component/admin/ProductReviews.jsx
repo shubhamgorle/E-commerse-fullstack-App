@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Metadata from '../layout/Metadata';
 import SideBar from './SideBar.jsx';
-import DeleteIcon from "@material-ui/icons/Delete"
-import StarIcon from "@material-ui/icons/Star"
+import DeleteIcon from "@mui/icons-material/Delete"
+import StarIcon from "@mui/icons-material/Star"
 import Loader from '../layout/loader/Loader.jsx';
 import { DELETE_REVIEW_RESET } from '../../constatnce/productConstant.js';
 const ProductReviews = () => {

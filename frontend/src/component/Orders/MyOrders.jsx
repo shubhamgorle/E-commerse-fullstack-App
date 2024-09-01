@@ -7,7 +7,7 @@ import Loader from '../layout/loader/Loader';
 import { Link } from 'react-router-dom';
 import { useAlert } from 'react-alert';
 import Metadata from '../layout/Metadata';
-import LaunchIcon from "@material-ui/icons/Launch"
+import LaunchIcon from "@mui/icons-material/Launch"
 
 const MyOrders = () => {
   const { user } = useSelector((state) => state.user)

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import "./UpdateProfile.css"
 import Loader from "../layout/loader/Loader"
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import Metadata from '../layout/Metadata';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import { useDispatch, useSelector } from "react-redux"

@@ -6,10 +6,10 @@ import {  clearErrors, updateProduct, getProductDetails} from '../../actions/pro
 import { useAlert } from 'react-alert';
 import { Button } from '@mui/material';
 import Metadata from '../layout/Metadata';
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import StorageIcon from "@material-ui/icons/Storage";
-import DescriptionIcon from "@material-ui/icons/Description";
-import SpellcheckIcon from "@material-ui/icons/Spellcheck";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import StorageIcon from "@mui/icons-material/Storage";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 import SideBar from './SideBar';

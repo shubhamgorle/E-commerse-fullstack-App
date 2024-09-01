@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import "./CheckoutStep.css"
-import LocalShippingIcon from "@material-ui/icons/LocalShipping"
-import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck"
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
-import {Typography, Stepper, StepLabel, Step} from "@material-ui/core"
+import LocalShippingIcon from "@mui/icons-material/LocalShipping"
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck"
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance"
+import {Typography, Stepper, StepLabel, Step} from "@mui/material"
 const CheckoutStep = ({ activeStep }) => {
     const steps = [
         {

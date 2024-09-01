@@ -1,6 +1,6 @@
 import React from "react";
 import "./contact.css"
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 const ContactSection = () => {
   return (

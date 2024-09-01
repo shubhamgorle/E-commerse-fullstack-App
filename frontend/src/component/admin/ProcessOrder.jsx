@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Metadata from '../layout/Metadata';
 import { Link, useParams } from "react-router-dom";
 import { Typography } from '@mui/material';
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { Button } from '@mui/material';
 import SideBar from './SideBar';
 import { useAlert } from 'react-alert';

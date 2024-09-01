@@ -8,9 +8,9 @@ import { useAlert } from 'react-alert';
 import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import axios from 'axios';
 import "./Payment.css"
-import CreditCardIcon from "@material-ui/icons/CreditCard"
-import EventIcon from "@material-ui/icons/Event"
-import VpnKeyIcon from "@material-ui/icons/VpnKey"
+import CreditCardIcon from "@mui/icons-material/CreditCard"
+import EventIcon from "@mui/icons-material/Event"
+import VpnKeyIcon from "@mui/icons-material/VpnKey"
 import { clearErrors, createOrder} from '../../actions/orderAction';
 
 const Payment = () => {

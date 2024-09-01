@@ -1,6 +1,6 @@
 import React from "react";
 import "./about.css";
-import { Button, Typography, Avatar } from "@material-ui/core";
+import { Button, Typography, Avatar } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 

@@ -3,7 +3,7 @@ import "./LoginSignUp.css"
 import Loader from "../layout/loader/Loader"
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import { Link } from 'react-router-dom'
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useDispatch, useSelector } from "react-redux"
 import { login,register, clearErrors } from "../../actions/userActions"

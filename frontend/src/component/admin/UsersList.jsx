@@ -7,8 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Metadata from '../layout/Metadata';
 import SideBar from './SideBar.jsx';
-import DeleteIcon from "@material-ui/icons/Delete"
-import EditIcon from "@material-ui/icons/Edit"
+import DeleteIcon from "@mui/icons-material/Delete"
+import EditIcon from "@mui/icons-material/Edit"
 import Loader from '../layout/loader/Loader.jsx';
 import { getAllUsers , clearErrors, deleteUser} from '../../actions/userActions.js';
 import { DELETE_USERS_RESET } from '../../constatnce/userConstants.js';
