@@ -10,7 +10,7 @@ import { useAlert } from 'react-alert'
 import Metadata from '../layout/Metadata';
 import { addItemsToCart } from '../../actions/cartAction'
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@mui/material"
-import { Rating } from "@material-ui/lab"
+import { Rating } from '@mui/lab';
 import { NEW_REVIEW_RESET } from '../../constatnce/productConstant'
 const ProductDetails = () => {
     const dispatch = useDispatch();

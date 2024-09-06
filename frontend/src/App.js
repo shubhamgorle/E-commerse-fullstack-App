@@ -72,7 +72,6 @@ function App() {
       <Router>
         <Header />
         {isAuthenticated && <UserOption user={user} />}
-
         <Routes>
           <Route exact path='/' element={<Home/>} />
           <Route exact path='/about' element={<About/>} />
